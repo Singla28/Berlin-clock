@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Set Theory Clock</title>
+	<script type="text/javascript"></script>
+<style type="text/css">
+	.clock{
+		background: #fff;
+		width: 300px;
+		height: 300px;
+		position: relative;
+		border:10px solid #333;
+		margin: 8% auto 0;
+		box-shadow: 0 2vw 4vw -1vw rgba(0,0,0,0.8);
+	}
+	.second{
+		background: #ececec;
+		width:40px;
+		height: 40px;
+		border-radius: 50%;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		position: absolute;
+		margin:8% auto 0;
+		z-index: 10;
+		border:5px solid #ececec;
+		box-shadow: 0 2px 4px -1px black;
+	}
+	.hour5{
+		width:170px;
+		height:25px;
+		border-radius: 20%;
+		position: relative;
+		margin: 8% auto 0;
+		top: 50px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		border:5px solid #ececec;
+		box-shadow: 0 2px 4px -1px black;
+
+	}
+	.hour1{
+		width:170px;
+		height:25px;
+		border-radius: 20%;
+		position: absolute;
+		z-index: 10;
+		margin: 8% auto 0;
+		top: 85px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		border:5px solid #ececec;
+		box-shadow: 0 2px 4px -1px black;
+
+	}
+	.minute5{
+		width:170px;
+		height:25px;
+		border-radius: 20%;
+		position: absolute;
+		margin: 8% auto 0;
+		top: 120px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 10;
+		border:5px solid #ececec;
+		box-shadow: 0 2px 4px -1px black;
+	}
+	.minute1{
+		width:170px;
+		height:25px;
+		border-radius: 20%;
+		margin: 8% auto 0;
+		top: 155px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		position: absolute;
+		z-index: 10;
+		border:5px solid #ececec;
+		box-shadow: 0 2px 4px 1px black;
+	}
+	.hourLine1{
+		display: inline-block;
+		background: #ececec;
+		width: 35px;
+		height:20px;
+		margin: 3px ;
+		border-top-left-radius: 20%;
+		border-bottom-left-radius: 20%;
+		box-shadow: 0 2px 4px 1px black;
+	}
+	.hourLine5{
+		display: inline-block;
+		background: #ececec;
+		width: 35px;
+		height:20px;
+		margin: 3px ;
+		border-top-left-radius: 20%;
+		border-bottom-left-radius: 20%;
+		box-shadow: 0 2px 4px 1px black;
+	}
+	.minuteLine1{
+		display: inline-block;
+		background: #ececec;
+		width: 35px;
+		height:20px;
+		margin: 3px;
+		border-top-left-radius: 20%;
+		border-bottom-left-radius: 20%;
+		box-shadow: 0 2px 4px 1px black;
+	}
+	.minuteLine5{
+		display: inline-block;
+		background: #ececec;
+		width: 9px;
+		height:20px;
+		margin: 3px;
+		border-top-left-radius: 20%;
+		border-bottom-left-radius: 20%;
+		box-shadow: 0 2px 4px 1px black;
+	}
+</style>
+</head>
+<body>
+	<div class="clock">
+		<div class="second"></div>
+		<div class="hour5"></div>
+		<div class="hour1"></div>
+		<div class="minute5"></div>
+		<div class="minute1"></div>
+	</div>
+	<script type="text/javascript">
+		
+
+		function clock()
+		{
+			var d= new Date(),
+			h = d.getHours(),
+			m = d.getMinutes(),
+			s=d.getSeconds(),
+			hE1=document.querySelector('.hourLine1'),
+			sE1=document.querySelector('.second'),
+			h1=document.querySelector('.hour1'),
+			h5=document.querySelector('.hour5'),
+			m1=document.querySelector('.minute1'),
+			m5=document.querySelector('.minute5'),
+			mE1=document.querySelector('.minuteLine1'),
+			mE5=document.querySelector('.minuteLine5'),
+			hE5=document.querySelector('.hourLine5');
+			h1.innerHTML=""
+			h5.innerHTML=""
+			m1.innerHTML=""
+			m5.innerHTML=""
+			// how  to change the property of multiple div's with same class names
+			//either override that part
+			//either change the property
+
+			if(s%2==0)
+			{
+				sE1.style.background="red";
+			}
+			else
+			{
+				sE1.style.background="#ececec";
+			}
+			if(m==0)
+			{
+				for(var i=1;i<=11;i++){
+					m5.innerHTML+="<div class='minuteLine5' style='background:#ececec;'></div>"
+					}
+				for(var i=1;i<=4;i++){
+					m1.innerHTML+="<div class='minuteLine1' style='background:#ececec;'></div>"
+				}
+			}
+			else
+			if(m%5==0 )
+			{
+					for(var i=1;i<=(m/5);i++){
+					m5.innerHTML+="<div class='minuteLine5' style='background:red;'></div>"
+				}
+				for(var i=(m/5)+1;i<=11;i++){
+					m5.innerHTML+="<div class='minuteLine5' style='background:#ececec;'></div>"
+				}
+				for(var i=1;i<=4;i++){
+					m1.innerHTML+="<div class='minuteLine1' style='background:#ececec;'></div>"
+				}		
+			}
+			else
+			{
+					for(var i=1;i<=(m%5);i++){
+					m1.innerHTML+="<div class='minuteLine1' style='background:red;'></div>"
+				}
+				for(var i=(m%5)+1;i<=4;i++){
+					m1.innerHTML+="<div class='minuteLine1' style='background:#ececec;'></div>"
+				}
+				if(m>5)	{
+					for(var i=1;i<=(m/5);i++){
+					m5.innerHTML+="<div class='minuteLine5' style='background:red;'></div>"
+					}
+					for(var i=(m/5);i<=11;i++){
+					m5.innerHTML+="<div class='minuteLine5' style='background:#ececec;'></div>"
+					}
+				}
+				else
+				{
+					for(var i=1;i<=11;i++){
+					m5.innerHTML+="<div class='minuteLine5' style='background:#ececec;'></div>"
+					}
+				}
+			}
+			if(h==0)
+			{
+				for(var i=1;i<=4;i++){
+					h5.innerHTML+="<div class='hourLine5' style='background:#ececec;'></div>"
+					}
+				for(var i=1;i<=4;i++){
+					h1.innerHTML+="<div class='hourLine1' style='background:#ececec;'></div>"
+				}
+			}
+			else
+			if(h%5==0 )
+			{
+				for(var i=1;i<=(h/5);i++){
+					h5.innerHTML+="<div class='hourLine5' style='background:red;'></div>"
+				}
+				for(var i=(h/5)+1;i<=4;i++){
+					h5.innerHTML+="<div class='hourLine5' style='background:#ececec;'></div>"
+				}
+				for(var i=1;i<=4;i++){
+					h1.innerHTML+="<div class='hourLine1' style='background:#ececec;'></div>"
+				}
+			}
+			else
+			{
+				for(var i=1;i<=(h%5);i++){
+					h1.innerHTML+="<div class='hourLine1' style='background:red;'></div>"
+				}
+				for(var i=(h%5)+1;i<=4;i++){
+					h1.innerHTML+="<div class='hourLine1' style='background:#ececec;'></div>"
+				}
+				if(h>5)	{
+					for(var i=1;i<=(h/5);i++){
+					h5.innerHTML+="<div class='hourLine5' style='background:red;'></div>"
+					}
+					for(var i=(h/5);i<=4;i++){
+					h5.innerHTML+="<div class='hourLine5' style='background:#ececec;'></div>"
+					}
+				}
+				else
+				{
+					for(var i=1;i<=4;i++){
+					h5.innerHTML+="<div class='hourLine5' style='background:#ececec;'></div>"
+					}
+				}
+				
+			}
+		}	
+		setInterval("clock()",1000);
+	</script>
+</body>
+</html>
